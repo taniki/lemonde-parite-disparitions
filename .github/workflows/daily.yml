@@ -1,0 +1,35 @@
+---
+name: "[lemonde.fr] scrap and cook obituaries"
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+jobs:
+  scrap_commit:
+    name: "scrap and commit new data"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: "install dependencies"
+        run: |
+          pip install -r requirements.txt
+      - name: "scrap rss feed"
+        run: |
+          python scrap_rss.py
+      - name: "cook list of articles"
+        run: |
+          python cook_articles.py
+      - name: "import annoted list and cook list of people"
+        run: |
+          python import_annotated.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "importe les données du jour"
+          file_pattern: "*.csv"
+
