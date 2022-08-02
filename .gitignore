@@ -1,0 +1,9 @@
+*.ipynb
+.ipynb_checkpoints
+
+# *.csv
+*.docx
+*.html
+*.pdf
+
+dashboard_files
