@@ -36,3 +36,5 @@ df.head()
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
 df.to_csv(f'daily_scrapping/{today}.csv', index=False)
+
+# %%
