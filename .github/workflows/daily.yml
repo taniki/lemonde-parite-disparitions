@@ -25,11 +25,8 @@ jobs:
       - name: "cook list of articles"
         run: |
           python cook_articles.py
-      - name: "import annoted list and cook list of people"
-        run: |
-          python import_annotated.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "importe les données du jour"
+          commit_message: "🤖📰 récupère les articles du jour"
           file_pattern: "**/*.csv *.csv"
 
