@@ -1,0 +1,26 @@
+---
+name: "[lemonde.fr] retrieve list of (dead) people"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scrap_commit:
+    name: "scrap final dataset"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: "install dependencies"
+        run: |
+          pip install -r requirements.txt
+      - name: "import annoted list and cook list of people"
+        run: |
+          python import_annotated.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🤖💀 récupère la liste des personnes décédées"
+          file_pattern: "**/*.csv *.csv"
