@@ -25,6 +25,9 @@ jobs:
       - name: "cook list of articles"
         run: |
           python cook_articles.py
+      - name: "cook list of new articles"
+        run: |
+          python cook_articles_new.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "🤖📰 récupère les articles du jour"
