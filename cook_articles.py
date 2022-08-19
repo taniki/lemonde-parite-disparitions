@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.13.8
+#       jupytext_version: 1.14.1
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -35,9 +35,14 @@ articles = (raw
         'title',
         'summary'
     ]]
+    .assign(
+        date = lambda df: pd.to_datetime(df.published)
+    )
+    .sort_values('date', ascending=False)
+    .drop('date', axis=1)
 )
 
-articles.shape
+articles
 
 # %%
 articles.to_csv('articles.csv', index=False)
