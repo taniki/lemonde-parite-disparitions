@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 7 * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - new_article
 
 jobs:
   scrap_commit:
